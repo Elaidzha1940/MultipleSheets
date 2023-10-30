@@ -1,9 +1,11 @@
+//  /*
 //
-//  MultipleSheetsApp.swift
-//  MultipleSheets
+//  Project: MultipleSheets
+//  File: MultipleSheetsApp.swift
+//  Created by: Elaidzha Shchukin
+//  Date: 30.10.2023.
 //
-//  Created by Elaidzha Shchukin on 30.10.2023.
-//
+//  */
 
 import SwiftUI
 
