@@ -21,31 +21,39 @@ struct ContentView: View {
     
     var body: some View {
         
-        VStack(spacing: 0) {
-        
-            Button("First") {
-                selectedModel = RandomModel(title: "One")
-                showSheet.toggle()
+        ZStack {
+            
+            Rectangle()
+            .fill(Gradient(colors: [.white, .black]))
+                .brightness(-0.2)
+                .edgesIgnoringSafeArea(.all)
+            
+            VStack(spacing: 0) {
+                
+                Button("First") {
+                    selectedModel = RandomModel(title: "One")
+                    showSheet.toggle()
+                }
+                .font(.system(size: 20, weight: .bold, design: .rounded))
+                .foregroundColor(.black)
+                .frame(maxWidth: .infinity)
+                .frame(height: 55)
+                .background(Color.white)
+                .cornerRadius(15)
+                .padding()
+                
+                Button("Second") {
+                    selectedModel = RandomModel(title: "Two")
+                    showSheet.toggle()
+                }
+                .font(.system(size: 20, weight: .bold, design: .rounded))
+                .foregroundColor(.black)
+                .frame(maxWidth: .infinity)
+                .frame(height: 55)
+                .background(Color.white)
+                .cornerRadius(15)
+                .padding()
             }
-            .font(.system(size: 20, weight: .bold, design: .rounded))
-            .foregroundColor(.black)
-            .frame(maxWidth: .infinity)
-            .frame(height: 55)
-            .background(Color.white)
-            .cornerRadius(15)
-            .padding()
-
-            Button("Second") {
-                selectedModel = RandomModel(title: "Two")
-                showSheet.toggle()
-            }
-            .font(.system(size: 20, weight: .bold, design: .rounded))
-            .foregroundColor(.black)
-            .frame(maxWidth: .infinity)
-            .frame(height: 55)
-            .background(Color.white)
-            .cornerRadius(15)
-            .padding()
         }
         .sheet(isPresented: $showSheet, content: {
             NextScreen(selectedModel: $selectedModel)
@@ -57,6 +65,7 @@ struct ContentView: View {
                 .cornerRadius(15)
                 .padding()
         })
+        .foregroundColor(.blue)
     }
 }
 
@@ -71,7 +80,6 @@ struct NextScreen: View {
 
 #Preview {
     ContentView()
-        .preferredColorScheme(.dark)
 }
 
 
