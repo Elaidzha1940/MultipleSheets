@@ -14,10 +14,15 @@ struct RandomModel: Identifiable {
     let title: String
 }
 
+// 1 - use a binding
+// 2 - use multiple .sheets
+// 3 - use $item
+
 struct ContentView: View {
     @State var selectedModel: RandomModel = RandomModel(title: "Start")
+    
     @State var showSheet: Bool = false
-    //@State var showSheet2: Bool = false
+    @State var showSheet2: Bool = false
     
     var body: some View {
         
@@ -31,7 +36,7 @@ struct ContentView: View {
             VStack(spacing: 0) {
                 
                 Button("First") {
-                    selectedModel = RandomModel(title: "One")
+                   // selectedModel = RandomModel(title: "One")
                     showSheet.toggle()
                 }
                 .font(.system(size: 20, weight: .bold, design: .rounded))
@@ -43,8 +48,8 @@ struct ContentView: View {
                 .padding()
                 
                 Button("Second") {
-                    selectedModel = RandomModel(title: "Two")
-                    showSheet.toggle()
+                    //selectedModel = RandomModel(title: "Two")
+                    showSheet2.toggle()
                 }
                 .font(.system(size: 20, weight: .bold, design: .rounded))
                 .foregroundColor(.black)
@@ -54,9 +59,13 @@ struct ContentView: View {
                 .cornerRadius(15)
                 .padding()
             }
+            .sheet(isPresented: $showSheet, content: {
+                //NextScreen(selectedModel: $selectedModel)
+                NextScreen(selectedModel: RandomModel(title: "Two"))
+            })
         }
         .sheet(isPresented: $showSheet, content: {
-            NextScreen(selectedModel: $selectedModel)
+            NextScreen(selectedModel: selectedModel)
                 .font(.system(size: 20, weight: .bold, design: .rounded))
                 .foregroundColor(.black)
                 .frame(maxWidth: .infinity)
@@ -70,7 +79,8 @@ struct ContentView: View {
 }
 
 struct NextScreen: View {
-    @Binding var selectedModel: RandomModel
+    //@Binding var selectedModel: RandomModel
+     var selectedModel: RandomModel
     
     var body: some View {
         Text(selectedModel.title)
