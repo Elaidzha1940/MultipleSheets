@@ -19,15 +19,14 @@ struct RandomModel: Identifiable {
 // 3 - use $item
 
 struct ContentView: View {
-    @State var selectedModel: RandomModel = RandomModel(title: "Start")
+    @State var selectedModel: RandomModel? = nil /*RandomModel(title: "Start")*/
     
-    @State var showSheet: Bool = false
-    @State var showSheet2: Bool = false
+//    @State var showSheet: Bool = false
+//    @State var showSheet2: Bool = false
     
     var body: some View {
         
         ZStack {
-            
             Rectangle()
             .fill(Gradient(colors: [.white, .black]))
                 .brightness(-0.2)
@@ -37,7 +36,7 @@ struct ContentView: View {
                 
                 Button("First") {
                    // selectedModel = RandomModel(title: "One")
-                    showSheet.toggle()
+                   //showSheet.toggle()
                 }
                 .font(.system(size: 20, weight: .bold, design: .rounded))
                 .foregroundColor(.black)
@@ -47,9 +46,14 @@ struct ContentView: View {
                 .cornerRadius(15)
                 .padding()
                 
+//                .sheet(isPresented: $showSheet, content: {
+//                    //NextScreen(selectedModel: $selectedModel)
+//                    NextScreen(selectedModel: RandomModel(title: "One"))
+//                })
+                
                 Button("Second") {
                     //selectedModel = RandomModel(title: "Two")
-                    showSheet2.toggle()
+                    //showSheet2.toggle()
                 }
                 .font(.system(size: 20, weight: .bold, design: .rounded))
                 .foregroundColor(.black)
@@ -58,23 +62,23 @@ struct ContentView: View {
                 .background(Color.white)
                 .cornerRadius(15)
                 .padding()
+                
+//                .sheet(isPresented: $showSheet2, content: {
+//                    NextScreen(selectedModel: RandomModel(title: "Two"))
+//                })
             }
-            .sheet(isPresented: $showSheet, content: {
-                //NextScreen(selectedModel: $selectedModel)
-                NextScreen(selectedModel: RandomModel(title: "Two"))
-            })
         }
-        .sheet(isPresented: $showSheet, content: {
-            NextScreen(selectedModel: selectedModel)
-                .font(.system(size: 20, weight: .bold, design: .rounded))
-                .foregroundColor(.black)
-                .frame(maxWidth: .infinity)
-                .frame(height: 55)
-                .background(Color.white)
-                .cornerRadius(15)
-                .padding()
-        })
-        .foregroundColor(.blue)
+        .sheet(item: $selectedModel, content: <#T##(Identifiable) -> View#>)
+//        .sheet(isPresented: $showSheet, content: {
+//            NextScreen(selectedModel: selectedModel)
+//                .font(.system(size: 20, weight: .bold, design: .rounded))
+//                .foregroundColor(.black)
+//                .frame(maxWidth: .infinity)
+//                .frame(height: 55)
+//                .background(Color.white)
+//                .cornerRadius(15)
+//                .padding()
+//        })
     }
 }
 
