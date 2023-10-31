@@ -26,49 +26,56 @@ struct ContentView: View {
     
     var body: some View {
         
-        ZStack {
-            Rectangle()
-            .fill(Gradient(colors: [.white, .black]))
-                .brightness(-0.2)
-                .edgesIgnoringSafeArea(.all)
-            
-            VStack(spacing: 0) {
+            ZStack {
+                Rectangle()
+                .fill(Gradient(colors: [.white, .black]))
+                    .brightness(-0.2)
+                    .edgesIgnoringSafeArea(.all)
                 
-                Button("First") {
-                   // selectedModel = RandomModel(title: "One")
-                   //showSheet.toggle()
+                ScrollView {
+                VStack(spacing: 0) {
+                    
+                    ForEach(0..<15) { index in
+                        Button("Button \(index)") {
+                           selectedModel = RandomModel(title: "\(index)")
+                           //showSheet.toggle()
+                        }
+                        .font(.system(size: 20, weight: .bold, design: .rounded))
+                        .foregroundColor(.black)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 55)
+                        .background(LinearGradient(colors: [Color.black, Color.white], startPoint: .topLeading, endPoint: .bottomTrailing))
+                        .cornerRadius(15)
+                        .padding()
+                    }
+                    
+                
+    //                .sheet(isPresented: $showSheet, content: {
+    //                    //NextScreen(selectedModel: $selectedModel)
+    //                    NextScreen(selectedModel: RandomModel(title: "One"))
+    //                })
+                    
+    //                Button("Second") {
+    //                    //selectedModel = RandomModel(title: "Two")
+    //                    //showSheet2.toggle()
+    //                }
+    //                .font(.system(size: 20, weight: .bold, design: .rounded))
+    //                .foregroundColor(.black)
+    //                .frame(maxWidth: .infinity)
+    //                .frame(height: 55)
+    //                .background(Color.white)
+    //                .cornerRadius(15)
+    //                .padding()
+                    
+    //                .sheet(isPresented: $showSheet2, content: {
+    //                    NextScreen(selectedModel: RandomModel(title: "Two"))
+    //                })
                 }
-                .font(.system(size: 20, weight: .bold, design: .rounded))
-                .foregroundColor(.black)
-                .frame(maxWidth: .infinity)
-                .frame(height: 55)
-                .background(Color.white)
-                .cornerRadius(15)
-                .padding()
-                
-//                .sheet(isPresented: $showSheet, content: {
-//                    //NextScreen(selectedModel: $selectedModel)
-//                    NextScreen(selectedModel: RandomModel(title: "One"))
-//                })
-                
-                Button("Second") {
-                    //selectedModel = RandomModel(title: "Two")
-                    //showSheet2.toggle()
-                }
-                .font(.system(size: 20, weight: .bold, design: .rounded))
-                .foregroundColor(.black)
-                .frame(maxWidth: .infinity)
-                .frame(height: 55)
-                .background(Color.white)
-                .cornerRadius(15)
-                .padding()
-                
-//                .sheet(isPresented: $showSheet2, content: {
-//                    NextScreen(selectedModel: RandomModel(title: "Two"))
-//                })
             }
+            }
+            .sheet(item: $selectedModel) { model in
+                NextScreen(selectedModel: model)
         }
-        .sheet(item: $selectedModel, content: <#T##(Identifiable) -> View#>)
 //        .sheet(isPresented: $showSheet, content: {
 //            NextScreen(selectedModel: selectedModel)
 //                .font(.system(size: 20, weight: .bold, design: .rounded))
